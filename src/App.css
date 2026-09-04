@@ -1,184 +1,697 @@
-.counter {
-  font-size: 16px;
-  padding: 5px 10px;
-  border-radius: 5px;
-  color: var(--accent);
-  background: var(--accent-bg);
-  border: 2px solid transparent;
-  transition: border-color 0.3s;
-  margin-bottom: 24px;
+/* ═══════════════════════════════════════════
+   TERMINAL
+═══════════════════════════════════════════ */
 
-  &:hover {
-    border-color: var(--accent-border);
-  }
-  &:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-  }
+:root {
+	--green: #00ff3c;
+	--green-dark: #008f27;
+
+	--screen: #02070a;
+
+	--key: #64717c;
+	--key-light: #8996a0;
+	--key-dark: #46515a;
+
+	--cyan: #00d9ff;
+
+	--red: #ff3038;
+	--green-key: #00d477;
+
+	--white: #f2f5f7;
 }
 
-.hero {
-  position: relative;
-
-  .base,
-  .framework,
-  .vite {
-    inset-inline: 0;
-    margin: 0 auto;
-  }
-
-  .base {
-    width: 170px;
-    position: relative;
-    z-index: 0;
-  }
-
-  .framework,
-  .vite {
-    position: absolute;
-  }
-
-  .framework {
-    z-index: 1;
-    top: 34px;
-    height: 28px;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(44deg) rotateY(39deg)
-      scale(1.4);
-  }
-
-  .vite {
-    z-index: 0;
-    top: 107px;
-    height: 26px;
-    width: auto;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(40deg) rotateY(39deg)
-      scale(0.8);
-  }
+#root {
+	width: 100%;
+	height: 100%;
 }
 
-#center {
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-  place-content: center;
-  place-items: center;
-  flex-grow: 1;
+.terminal {
+	width: 100%;
+	height: 100dvh;
+	min-height: 0;
 
-  @media (max-width: 1024px) {
-    padding: 32px 20px 24px;
-    gap: 18px;
-  }
+	display: flex;
+	flex-direction: column;
+
+	overflow: hidden;
+
+	background: #000;
 }
 
-#next-steps {
-  display: flex;
-  border-top: 1px solid var(--border);
-  text-align: left;
+/* ═══════════════════════════════════════════
+   WMS SCREEN
+═══════════════════════════════════════════ */
 
-  & > div {
-    flex: 1 1 0;
-    padding: 32px;
-    @media (max-width: 1024px) {
-      padding: 24px 20px;
-    }
-  }
+.wms-screen {
+	position: relative;
 
-  .icon {
-    margin-bottom: 16px;
-    width: 22px;
-    height: 22px;
-  }
+	flex: 1 1 auto;
+	min-height: 0;
 
-  @media (max-width: 1024px) {
-    flex-direction: column;
-    text-align: center;
-  }
+	overflow: hidden;
+
+	background: radial-gradient(
+		ellipse at 50% 0%,
+		#081016 0%,
+		#02070a 55%,
+		#000 100%
+	);
+
+	padding: clamp(14px, 4vw, 26px) clamp(16px, 5vw, 30px) 8px;
+
+	color: var(--green);
+
+	font-family: "Courier New", Courier, monospace;
+
+	text-shadow: 0 0 3px rgba(0, 255, 60, 0.35);
 }
 
-#docs {
-  border-right: 1px solid var(--border);
+/* ═══════════════════════════════════════════
+   WMS TITLE
+═══════════════════════════════════════════ */
 
-  @media (max-width: 1024px) {
-    border-right: none;
-    border-bottom: 1px solid var(--border);
-  }
+.wms-header {
+	font-size: clamp(18px, 5vw, 25px);
+	line-height: 1;
+
+	font-weight: 700;
+
+	white-space: nowrap;
 }
 
-#next-steps ul {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  gap: 8px;
-  margin: 32px 0 0;
+.wms-separator {
+	margin-top: 6px;
 
-  .logo {
-    height: 18px;
-  }
+	font-size: clamp(16px, 4.5vw, 22px);
+	line-height: 1;
 
-  a {
-    color: var(--text-h);
-    font-size: 16px;
-    border-radius: 6px;
-    background: var(--social-bg);
-    display: flex;
-    padding: 6px 12px;
-    align-items: center;
-    gap: 8px;
-    text-decoration: none;
-    transition: box-shadow 0.3s;
-
-    &:hover {
-      box-shadow: var(--shadow);
-    }
-    .button-icon {
-      height: 18px;
-      width: 18px;
-    }
-  }
-
-  @media (max-width: 1024px) {
-    margin-top: 20px;
-    flex-wrap: wrap;
-    justify-content: center;
-
-    li {
-      flex: 1 1 calc(50% - 8px);
-    }
-
-    a {
-      width: 100%;
-      justify-content: center;
-      box-sizing: border-box;
-    }
-  }
+	letter-spacing: 0;
 }
 
-#spacer {
-  height: 88px;
-  border-top: 1px solid var(--border);
-  @media (max-width: 1024px) {
-    height: 48px;
-  }
+/* ═══════════════════════════════════════════
+   LOGIN
+═══════════════════════════════════════════ */
+
+.login-form {
+	margin-top: 8px;
+
+	display: flex;
+	flex-direction: column;
+
+	gap: 1px;
 }
 
-.ticks {
-  position: relative;
-  width: 100%;
+.terminal-field {
+	appearance: none;
+	border: 0;
 
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    top: -4.5px;
-    border: 5px solid transparent;
-  }
+	width: 100%;
 
-  &::before {
-    left: 0;
-    border-left-color: var(--border);
-  }
-  &::after {
-    right: 0;
-    border-right-color: var(--border);
-  }
+	display: flex;
+	align-items: baseline;
+
+	padding: 0;
+
+	background: transparent;
+	color: var(--green);
+
+	text-align: left;
+
+	cursor: pointer;
+
+	font-size: clamp(17px, 4.7vw, 24px);
+	line-height: 1.25;
+
+	text-shadow: 0 0 3px rgba(0, 255, 60, 0.35);
+}
+
+.field-label {
+	flex: 0 0 auto;
+
+	white-space: pre;
+}
+
+.field-line {
+	position: relative;
+
+	display: inline-flex;
+
+	align-items: center;
+
+	min-width: clamp(125px, 42vw, 210px);
+	height: 1.25em;
+
+	margin-left: 4px;
+
+	border-bottom: 2px solid var(--green);
+}
+
+.field-content {
+	min-width: 4px;
+
+	white-space: nowrap;
+
+	overflow: hidden;
+}
+
+/* ═══════════════════════════════════════════
+   CURSOR
+═══════════════════════════════════════════ */
+
+.terminal-cursor {
+	display: inline-block;
+
+	width: 9px;
+	height: 21px;
+
+	margin-left: 2px;
+
+	background: #f5f5f5;
+
+	animation: terminal-blink 1s steps(1) infinite;
+}
+
+@keyframes terminal-blink {
+	0%,
+	49% {
+		opacity: 1;
+	}
+
+	50%,
+	100% {
+		opacity: 0;
+	}
+}
+
+/* ═══════════════════════════════════════════
+   MESSAGE
+═══════════════════════════════════════════ */
+
+.wms-message {
+	margin-top: 12px;
+
+	font-size: clamp(10px, 2.7vw, 14px);
+
+	font-style: italic;
+
+	opacity: 0.7;
+}
+
+/* ═══════════════════════════════════════════
+   KEYBOARD SECTION
+═══════════════════════════════════════════ */
+
+.keyboard-section {
+	position: relative;
+
+	flex: 0 0 clamp(255px, 42dvh, 430px);
+
+	width: 100%;
+
+	display: flex;
+	flex-direction: column;
+
+	min-height: 0;
+
+	background: #101820;
+
+	border-top: 1px solid #27333b;
+
+	touch-action: pan-y;
+
+	user-select: none;
+}
+
+/* ═══════════════════════════════════════════
+   INDICATORS
+═══════════════════════════════════════════ */
+
+.keyboard-indicators {
+	position: absolute;
+
+	top: -15px;
+	left: 0;
+	right: 0;
+
+	height: 14px;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	gap: 8px;
+
+	pointer-events: none;
+
+	z-index: 20;
+}
+
+.keyboard-indicator {
+	width: 8px;
+	height: 8px;
+
+	border: 1px solid #006d26;
+
+	border-radius: 1px;
+
+	background: transparent;
+}
+
+.keyboard-indicator.active {
+	background: var(--green);
+
+	border-color: var(--green);
+
+	box-shadow: 0 0 8px rgba(0, 255, 60, 0.5);
+}
+
+/* ═══════════════════════════════════════════
+   KEYBOARD VIEWPORT
+═══════════════════════════════════════════ */
+
+.keyboard-viewport {
+	flex: 1 1 auto;
+
+	min-height: 0;
+
+	width: 100%;
+
+	overflow: hidden;
+
+	background: #17212a;
+
+	touch-action: pan-y;
+}
+
+/* ═══════════════════════════════════════════
+   KEYBOARD TRACK
+═══════════════════════════════════════════ */
+
+.keyboard-track {
+	width: 100%;
+	height: 100%;
+
+	display: flex;
+
+	transition: transform 180ms ease-out;
+
+	will-change: transform;
+}
+
+/* ═══════════════════════════════════════════
+   KEYBOARD PAGE
+═══════════════════════════════════════════ */
+
+.keyboard-page {
+	flex: 0 0 100%;
+
+	width: 100%;
+	height: 100%;
+
+	min-width: 100%;
+}
+
+/* ═══════════════════════════════════════════
+   KEYBOARD
+═══════════════════════════════════════════ */
+
+.keyboard {
+	width: 100%;
+	height: 100%;
+
+	padding: 2px 2px 0;
+
+	display: flex;
+	flex-direction: column;
+
+	justify-content: stretch;
+
+	gap: 2px;
+}
+
+/* ═══════════════════════════════════════════
+   ROW
+═══════════════════════════════════════════ */
+
+.keyboard-row {
+	flex: 1 1 0;
+
+	min-height: 0;
+
+	display: flex;
+
+	gap: 2px;
+}
+
+/* ═══════════════════════════════════════════
+   KEY
+═══════════════════════════════════════════ */
+
+.key {
+	flex: 1 1 0;
+
+	min-width: 0;
+	min-height: 0;
+
+	padding: 0;
+
+	border: 1px solid rgba(30, 40, 48, 0.8);
+
+	border-radius: 1px;
+
+	background: linear-gradient(
+		180deg,
+		var(--key-light) 0%,
+		var(--key) 48%,
+		var(--key-dark) 100%
+	);
+
+	color: #f3f6f8;
+
+	font-size: clamp(14px, 4.2vw, 23px);
+	font-weight: 500;
+
+	line-height: 1;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	text-align: center;
+
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
+
+	cursor: pointer;
+
+	transition: filter 60ms ease, transform 40ms ease;
+}
+
+.key:active {
+	transform: translateY(1px);
+
+	filter: brightness(0.75);
+}
+
+/* ═══════════════════════════════════════════
+   FUNCTION KEYS
+═══════════════════════════════════════════ */
+
+.key-function,
+.key-function-wide {
+	color: var(--cyan);
+
+	text-shadow: 0 0 5px rgba(0, 217, 255, 0.3);
+}
+
+/* ═══════════════════════════════════════════
+   EXIT
+═══════════════════════════════════════════ */
+
+.key-exit {
+	background: linear-gradient(180deg, #ff5056 0%, #f12f38 100%);
+
+	color: white;
+
+	font-weight: 700;
+}
+
+/* ═══════════════════════════════════════════
+   P1
+═══════════════════════════════════════════ */
+
+.key-p1 {
+	background: linear-gradient(180deg, #15e58c 0%, #00bd6c 100%);
+
+	color: white;
+
+	font-weight: 700;
+}
+
+/* ═══════════════════════════════════════════
+   P2
+═══════════════════════════════════════════ */
+
+.key-p2 {
+	background: linear-gradient(180deg, #ff555b 0%, #ed2934 100%);
+
+	color: white;
+
+	font-weight: 700;
+}
+
+/* ═══════════════════════════════════════════
+   NAVIGATION
+═══════════════════════════════════════════ */
+
+.key-navigation {
+	color: var(--cyan);
+
+	font-weight: 700;
+
+	font-size: clamp(17px, 5vw, 27px);
+}
+
+/* ═══════════════════════════════════════════
+   ENTER
+═══════════════════════════════════════════ */
+
+.key-enter {
+	color: var(--cyan);
+
+	font-weight: 700;
+
+	font-size: clamp(19px, 5vw, 28px);
+}
+
+/* ═══════════════════════════════════════════
+   SPACE
+═══════════════════════════════════════════ */
+
+.key-space {
+	color: var(--cyan);
+
+	font-size: clamp(22px, 7vw, 32px);
+}
+
+/* ═══════════════════════════════════════════
+   F1 — SYMBOLS
+═══════════════════════════════════════════ */
+
+.keyboard-f1 .key {
+	font-size: clamp(14px, 4vw, 22px);
+}
+
+.keyboard-f1 .key-exit {
+	flex: 1.7;
+}
+
+/* ═══════════════════════════════════════════
+   F2 — FUNCTION
+═══════════════════════════════════════════ */
+
+.keyboard-f2 .keyboard-row:first-child {
+	flex: 0.85;
+}
+
+.keyboard-f2 .keyboard-row:first-child .key-function-wide {
+	flex: 1.5;
+}
+
+.keyboard-f2 .keyboard-row:first-child .key-exit {
+	flex: 1.35;
+}
+
+/* ═══════════════════════════════════════════
+   F3 — NUMERIC
+═══════════════════════════════════════════ */
+
+.keyboard-f3 .key {
+	font-size: clamp(17px, 5vw, 26px);
+}
+
+.keyboard-f3 .keyboard-row:last-child .key {
+	font-size: clamp(15px, 4vw, 21px);
+}
+
+/* ═══════════════════════════════════════════
+   F4 / F5 — ALPHABET
+═══════════════════════════════════════════ */
+
+.keyboard-f4 .key,
+.keyboard-f5 .key {
+	font-size: clamp(14px, 4.2vw, 23px);
+}
+
+.keyboard-f4 .keyboard-row:last-child .key,
+.keyboard-f5 .keyboard-row:last-child .key {
+	font-size: clamp(13px, 3.8vw, 20px);
+}
+
+.keyboard-f4 .keyboard-row:last-child .key-space,
+.keyboard-f5 .keyboard-row:last-child .key-space {
+	flex: 2.6;
+}
+
+/* ═══════════════════════════════════════════
+   ZEBRA TOOLBAR
+═══════════════════════════════════════════ */
+
+.keyboard-toolbar {
+	flex: 0 0 31px;
+
+	width: 100%;
+
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	padding: 0 7px;
+
+	background: #e8edf0;
+
+	border-top: 1px solid #b9c1c6;
+
+	border-bottom: 1px solid #aeb7bc;
+}
+
+.toolbar-button {
+	width: 34px;
+	height: 27px;
+
+	padding: 0;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	border: 0;
+
+	background: transparent;
+
+	color: #33404a;
+}
+
+.menu-lines {
+	width: 21px;
+
+	display: flex;
+	flex-direction: column;
+
+	gap: 3px;
+}
+
+.menu-lines i {
+	display: block;
+
+	width: 100%;
+	height: 3px;
+
+	border-radius: 1px;
+
+	background: #4c5962;
+}
+
+.keyboard-icon {
+	font-size: 23px;
+
+	line-height: 1;
+
+	color: #25313a;
+}
+
+/* ═══════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════ */
+
+.keyboard-footer {
+	flex: 0 0 18px;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	gap: 10px;
+
+	background: #080d11;
+
+	color: #00b52b;
+
+	font-size: 8px;
+
+	letter-spacing: 1px;
+
+	opacity: 0.8;
+}
+
+.keyboard-names {
+	display: flex;
+	gap: 7px;
+}
+
+.keyboard-names span {
+	opacity: 0.35;
+}
+
+.keyboard-names span.active {
+	opacity: 1;
+
+	color: var(--green);
+
+	font-weight: bold;
+}
+
+/* ═══════════════════════════════════════════
+   SMALL DEVICES
+═══════════════════════════════════════════ */
+
+@media (max-height: 650px) {
+	.keyboard-section {
+		flex-basis: 43dvh;
+	}
+
+	.wms-screen {
+		padding-top: 10px;
+	}
+
+	.wms-header {
+		font-size: 18px;
+	}
+
+	.terminal-field {
+		font-size: 17px;
+	}
+
+	.wms-message {
+		margin-top: 6px;
+	}
+
+	.keyboard-toolbar {
+		flex-basis: 27px;
+	}
+
+	.keyboard-footer {
+		flex-basis: 14px;
+	}
+}
+
+/* ═══════════════════════════════════════════
+   TABLET / LARGE SCREEN
+   On garde le comportement mobile.
+═══════════════════════════════════════════ */
+
+@media (min-width: 600px) {
+	#root {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		background: #d8d8d8;
+	}
+
+	.terminal {
+		width: min(100vw, 430px);
+		height: min(100dvh, 900px);
+
+		box-shadow: 0 0 30px rgba(0, 0, 0, 0.35);
+	}
 }
