@@ -45,7 +45,7 @@ const menus = {
   // ==========================================
 
   'flux-entrants': {
-    title: 'Flux entrants',
+    title: null,
 
     items: [],
   },
@@ -128,7 +128,7 @@ const menus = {
   },
 
   // ==========================================
-  // ÉCRAN FINAL DU CHEMIN DE TEST
+  // TRANSFERT PARTIEL CTN
   // ==========================================
 
   'trf-partiel-ctn': {
@@ -137,7 +137,7 @@ const menus = {
   },
 
   // ==========================================
-  // PLACEHOLDERS
+  // AUTRES ÉCRANS FLUX SORTANTS
   // ==========================================
 
   preparation: {
@@ -160,6 +160,10 @@ const menus = {
     title: 'Expédition',
   },
 
+  // ==========================================
+  // AUTRES MENUS PRINCIPAUX
+  // ==========================================
+
   inventory: {
     type: 'screen',
     title: 'Inv / Gest stk',
@@ -179,6 +183,10 @@ const menus = {
     type: 'screen',
     title: 'Chariot Nord',
   },
+
+  // ==========================================
+  // AUTRES ÉCRANS MODIFS CTN
+  // ==========================================
 
   'interro-ctn': {
     type: 'screen',
