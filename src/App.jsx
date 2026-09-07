@@ -112,24 +112,14 @@ function App() {
   // APPLICATION
   // -------------------------
 
-  return (
-    <div className="app">
+ return (
+    <div className="terminal">
       <Header />
 
-{currentMenu?.type === 'screen' ? (
-  <div className="menu-screen">
-    <div className="menu-content">
-      <div className="menu-title">
-        {currentMenu.title}
-      </div>
-    </div>
-  </div>
-) : (
-  <MenuScreen
-    menu={currentMenu}
-    selectedKey={selectedKey}
-  />
-)}
+      <MenuScreen
+        menu={currentMenu}
+        selectedKey={selectedKey}
+      />
 
       <Keyboard
         onKeyPress={handleKeyPress}

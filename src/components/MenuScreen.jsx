@@ -1,7 +1,17 @@
 function MenuScreen({ menu, selectedKey }) {
+  if (!menu) {
+    return null;
+  }
+
   return (
-    <div className="menu-screen">
+    <main className="wms-screen menu-screen">
       <div className="menu-content">
+
+        {menu.title && (
+          <div className="menu-title">
+            {menu.title}
+          </div>
+        )}
 
         <div className="menu-items">
           {menu.items.map((item) => (
@@ -24,8 +34,7 @@ function MenuScreen({ menu, selectedKey }) {
           <span>Choix:</span>
 
           <span className="menu-choice-value">
-            {selectedKey}
-            {!selectedKey && ' '}
+            {selectedKey || ' '}
           </span>
         </div>
 
@@ -34,7 +43,7 @@ function MenuScreen({ menu, selectedKey }) {
         </div>
 
       </div>
-    </div>
+    </main>
   );
 }
 
