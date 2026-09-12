@@ -4,7 +4,10 @@ import Keyboard from './Keyboard';
 function LoginScreen({ onLogin }) {
   const [userId, setUserId] = useState('');
   const [password, setPassword] = useState('');
-  const [activeField, setActiveField] = useState('userId');
+  const [loginStep, setLoginStep] = useState('userId');
+
+  // 3 ou 4 lettres, uniquement A-Z majuscules
+  const validFormat = /^[A-Z]{3,4}$/;
 
   const handleKeyPress = (key) => {
     // ─────────────────────────────
@@ -13,6 +16,7 @@ function LoginScreen({ onLogin }) {
     if (key === 'Exit') {
       setUserId('');
       setPassword('');
+      setLoginStep('userId');
       return;
     }
 
@@ -20,7 +24,7 @@ function LoginScreen({ onLogin }) {
     // BACKSPACE
     // ─────────────────────────────
     if (key === '←') {
-      if (activeField === 'userId') {
+      if (loginStep === 'userId') {
         setUserId((value) => value.slice(0, -1));
       } else {
         setPassword((value) => value.slice(0, -1));
@@ -32,9 +36,33 @@ function LoginScreen({ onLogin }) {
     // ─────────────────────────────
     // ENTER
     // ─────────────────────────────
-    if (key === 'Enter') {
-      handleLogin();
-      return;
+    if (key === 'Enter' || key === '↵') {
+
+      // USER ID → PASSWORD
+      if (loginStep === 'userId') {
+        if (!validFormat.test(userId)) {
+          alert(
+            'User ID doit contenir 3 ou 4 lettres MAJUSCULES'
+          );
+          return;
+        }
+
+        setLoginStep('password');
+        return;
+      }
+
+      // PASSWORD → LOGIN
+      if (loginStep === 'password') {
+        if (!validFormat.test(password)) {
+          alert(
+            'Password doit contenir 3 ou 4 lettres MAJUSCULES'
+          );
+          return;
+        }
+
+        onLogin(userId);
+        return;
+      }
     }
 
     // ─────────────────────────────
@@ -47,11 +75,13 @@ function LoginScreen({ onLogin }) {
     // ─────────────────────────────
     // USER ID
     // ─────────────────────────────
-    if (activeField === 'userId') {
+    if (loginStep === 'userId') {
+      if (!/^[A-Z]$/.test(key)) {
+        return;
+      }
+
       if (userId.length < 4) {
-        setUserId((value) =>
-          (value + key).slice(0, 4).toUpperCase()
-        );
+        setUserId((value) => value + key);
       }
 
       return;
@@ -60,24 +90,15 @@ function LoginScreen({ onLogin }) {
     // ─────────────────────────────
     // PASSWORD
     // ─────────────────────────────
-    if (activeField === 'password') {
-      if (password.length < 10) {
-        setPassword((value) =>
-          value + key
-        );
+    if (loginStep === 'password') {
+      if (!/^[A-Z]$/.test(key)) {
+        return;
+      }
+
+      if (password.length < 4) {
+        setPassword((value) => value + key);
       }
     }
-  };
-
-  const handleLogin = () => {
-    const login = userId.toUpperCase();
-
-    if (login.length >= 3 && login.length <= 4) {
-      onLogin(login);
-      return;
-    }
-
-    alert('Login doit faire 3 ou 4 caractères MAJUSCULES');
   };
 
   return (
@@ -102,11 +123,11 @@ function LoginScreen({ onLogin }) {
           <button
             type="button"
             className={`terminal-field ${
-              activeField === 'userId'
+              loginStep === 'userId'
                 ? 'active'
                 : ''
             }`}
-            onClick={() => setActiveField('userId')}
+            onClick={() => setLoginStep('userId')}
           >
             <span className="field-label">
               User ID:
@@ -117,7 +138,7 @@ function LoginScreen({ onLogin }) {
                 {userId}
               </span>
 
-              {activeField === 'userId' && (
+              {loginStep === 'userId' && (
                 <span className="terminal-cursor" />
               )}
             </span>
@@ -127,11 +148,11 @@ function LoginScreen({ onLogin }) {
           <button
             type="button"
             className={`terminal-field ${
-              activeField === 'password'
+              loginStep === 'password'
                 ? 'active'
                 : ''
             }`}
-            onClick={() => setActiveField('password')}
+            onClick={() => setLoginStep('password')}
           >
             <span className="field-label">
               Password:
@@ -142,7 +163,7 @@ function LoginScreen({ onLogin }) {
                 {'•'.repeat(password.length)}
               </span>
 
-              {activeField === 'password' && (
+              {loginStep === 'password' && (
                 <span className="terminal-cursor" />
               )}
             </span>

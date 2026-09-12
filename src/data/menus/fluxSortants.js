@@ -1,55 +1,4 @@
-const menus = {
-  // ==========================================
-  // MENU PRINCIPAL
-  // ==========================================
-
-  main: {
-    title: null,
-
-    items: [
-      {
-        key: '1',
-        label: 'Flux entrants',
-        next: 'flux-entrants',
-      },
-      {
-        key: '2',
-        label: 'Flux sortants',
-        next: 'flux-sortants',
-      },
-      {
-        key: '3',
-        label: 'Inv / Gest stk',
-        next: 'inventory',
-      },
-      {
-        key: '4',
-        label: 'Superviseur',
-        next: 'superviseur',
-      },
-      {
-        key: '5',
-        label: 'LED',
-        next: 'led',
-      },
-      {
-        key: '6',
-        label: 'Chariot Nord',
-        next: 'chariot-nord',
-      },
-    ],
-  },
-
-  // ==========================================
-  // FLUX ENTRANTS
-  // ==========================================
-
-  'flux-entrants': {
-    title: null,
-
-    items: [],
-  },
-
+const fluxSortantsMenus = {
   // ==========================================
   // FLUX SORTANTS
   // ==========================================
@@ -128,7 +77,7 @@ const menus = {
   },
 
   // ==========================================
-  // TRANSFERT PARTIEL CTN
+  // ÉCRAN DE TEST ACTUEL
   // ==========================================
 
   'trf-partiel-ctn': {
@@ -137,7 +86,7 @@ const menus = {
   },
 
   // ==========================================
-  // AUTRES ÉCRANS FLUX SORTANTS
+  // PLACEHOLDERS
   // ==========================================
 
   preparation: {
@@ -159,34 +108,6 @@ const menus = {
     type: 'screen',
     title: 'Expédition',
   },
-
-  // ==========================================
-  // AUTRES MENUS PRINCIPAUX
-  // ==========================================
-
-  inventory: {
-    type: 'screen',
-    title: 'Inv / Gest stk',
-  },
-
-  superviseur: {
-    type: 'screen',
-    title: 'Superviseur',
-  },
-
-  led: {
-    type: 'screen',
-    title: 'LED',
-  },
-
-  'chariot-nord': {
-    type: 'screen',
-    title: 'Chariot Nord',
-  },
-
-  // ==========================================
-  // AUTRES ÉCRANS MODIFS CTN
-  // ==========================================
 
   'interro-ctn': {
     type: 'screen',
@@ -214,4 +135,4 @@ const menus = {
   },
 };
 
-export default menus;
+export default fluxSortantsMenus;

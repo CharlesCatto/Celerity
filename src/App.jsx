@@ -5,25 +5,15 @@ import Keyboard from './components/Keyboard';
 import LoginScreen from './components/LoginScreen';
 import MenuScreen from './components/MenuScreen';
 
-import menus from './data/menu';
+import menus from './data/menus';
 
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
-
-  // La navigation est une pile :
-  // ['main']
-  // ['main', 'flux-sortants']
-  // ['main', 'flux-sortants', 'modifs-ctn']
-  // etc.
   const [navigation, setNavigation] = useState(['main']);
-
   const [selectedKey, setSelectedKey] = useState('');
 
-  const currentScreen =
-    navigation[navigation.length - 1];
-
-  const currentMenu =
-    menus[currentScreen];
+  const currentScreen = navigation[navigation.length - 1];
+  const currentMenu = menus[currentScreen];
 
   const handleLogin = () => {
     setAuthenticated(true);
@@ -32,11 +22,7 @@ function App() {
   };
 
   const navigateTo = (screenId) => {
-    setNavigation((previous) => [
-      ...previous,
-      screenId,
-    ]);
-
+    setNavigation((previous) => [...previous, screenId]);
     setSelectedKey('');
   };
 
@@ -45,10 +31,8 @@ function App() {
       if (previous.length <= 1) {
         return previous;
       }
-
       return previous.slice(0, -1);
     });
-
     setSelectedKey('');
   };
 
@@ -56,7 +40,6 @@ function App() {
     // -------------------------
     // CHIFFRE
     // -------------------------
-
     if (/^[0-9]$/.test(key)) {
       setSelectedKey(key);
       return;
@@ -65,16 +48,14 @@ function App() {
     // -------------------------
     // ENTER
     // -------------------------
-
     if (key === 'Enter' || key === '↵') {
       if (!selectedKey || !currentMenu) {
         return;
       }
 
-      const selectedItem =
-        currentMenu.items.find(
-          (item) => item.key === selectedKey
-        );
+      const selectedItem = currentMenu.items.find(
+        (item) => item.key === selectedKey
+      );
 
       if (selectedItem?.next) {
         navigateTo(selectedItem.next);
@@ -86,24 +67,26 @@ function App() {
     // -------------------------
     // RETOUR
     // -------------------------
+    if (key === '←' || key === 'P2') {
+      if (key === 'P2' && navigation.length === 1) {
+        setAuthenticated(false);
+        setNavigation(['main']);
+        setSelectedKey('');
+        return;
+      }
 
-    if (key === '←') {
       goBack();
     }
-  };
+  }; // <--- L'accolade manquante qui fermait handleKeyPress était ici !
 
   // -------------------------
   // LOGIN
   // -------------------------
-
   if (!authenticated) {
     return (
       <div className="app">
         <Header />
-
-        <LoginScreen
-          onLogin={handleLogin}
-        />
+        <LoginScreen onLogin={handleLogin} />
       </div>
     );
   }
@@ -111,19 +94,11 @@ function App() {
   // -------------------------
   // APPLICATION
   // -------------------------
-
- return (
+  return (
     <div className="terminal">
       <Header />
-
-      <MenuScreen
-        menu={currentMenu}
-        selectedKey={selectedKey}
-      />
-
-      <Keyboard
-        onKeyPress={handleKeyPress}
-      />
+      <MenuScreen menu={currentMenu} selectedKey={selectedKey} />
+      <Keyboard onKeyPress={handleKeyPress} />
     </div>
   );
 }
